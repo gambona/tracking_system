@@ -190,7 +190,41 @@ def mostrar_deliverables():
             "Completed", "In Progress", "Not Started", "Completed", "In Progress", 
             "Not Started", "Completed", "In Progress", "Not Started", "Completed"]
     }
+    deliverables_df = pd.DataFrame(deliverables_data)
+    deliverables_df['Deadline'] = pd.to_datetime(deliverables_df['Deadline'])  # Convert deadlines to datetime
     
+    # Display the full dataframe initially
+    st.subheader("📦 Deliverables Overview")
+    st.dataframe(deliverables_df)
+    
+    # Filter by Status
+    st.subheader("Filter by Status")
+    status_filter = st.selectbox("Select status to filter", ["All", "Not Started", "In Progress", "Completed"])
+    if status_filter != "All":
+        filtered_df = deliverables_df[deliverables_df['Status'] == status_filter]
+        st.write(f"Deliverables with status **{status_filter}**:")
+        st.dataframe(filtered_df)
+    else:
+        st.write("Showing all deliverables")
+        st.dataframe(deliverables_df)
+    
+    # Filter by Owner
+    st.subheader("Filter by Owner")
+    owner_filter = st.selectbox("Select an owner to view their deliverables", ["All"] + list(deliverables_df['Owner'].unique()))
+    if owner_filter != "All":
+        filtered_df = deliverables_df[deliverables_df['Owner'] == owner_filter]
+        st.write(f"Deliverables owned by **{owner_filter}**:")
+        st.dataframe(filtered_df)
+    else:
+        st.write("Showing all deliverables")
+        st.dataframe(deliverables_df)
+    
+    # Filter by Due Date
+    st.subheader("Filter by Due Date")
+    due_date_filter = st.date_input("Select a due date to view deliverables due on or before", value=pd.Timestamp('2024-09-30'))
+    filtered_df = deliverables_df[deliverables_df['Deadline'] <= pd.to_datetime(due_date_filter)]
+    st.write(f"Deliverables due on or before **{due_date_filter}**:")
+    st.dataframe(filtered_df)
 
     
 with st.sidebar:
