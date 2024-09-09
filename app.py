@@ -104,11 +104,6 @@ def mostrar_contract():
     contract_to_update = st.number_input("Enter Contract ID to Update", min_value=1, step=1)
     new_status = st.selectbox("New Status", ["Not Started", "In Progress", "Completed"], key="update_status")
 
-    if st.button("Update Status"):
-        df.loc[df['Status'] == "Not Started", 'Status'] = new_status
-        df.to_csv(file_path, index=False)  # Save the updated status to the CSV
-        st.success(f"Status for Contract ID {contract_to_update} updated!")
-
 with st.sidebar:
     diapositiva = st.radio(
         "Índice",
