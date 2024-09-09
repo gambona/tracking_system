@@ -3,6 +3,7 @@ import pandas as pd
 
 st.set_page_config(
     page_title="8 Sleep Affiliates & Influencers Tracking System",
+    theme="dark",
     page_icon="📘",
     layout="wide",
     initial_sidebar_state="auto",
@@ -227,6 +228,7 @@ def mostrar_deliverables():
 
     
 with st.sidebar:
+    st.image("Eight_Sleep_logo.png")
     diapositiva = st.radio(
         "Índice",
         ("Partners", "Contracts", "Deliverables"))
