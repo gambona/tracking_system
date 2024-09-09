@@ -228,7 +228,7 @@ def mostrar_deliverables():
 with st.sidebar:
     st.image("Eight_Sleep_logo.png")
     diapositiva = st.radio(
-        "Índice",
+        "Index",
         ("Partners", "Contracts", "Deliverables"))
 
 funciones_diapositivas = {
