@@ -97,6 +97,7 @@ def mostrar_partners():
     df_no_index = df.reset_index(drop=True)
     st.subheader("All Contracts")
     st.table(df_no_index)
+    
 def add_new_contact():
     st.subheader("Add a New Contract")
     partner = st.text_input("Partner Name")
@@ -107,6 +108,7 @@ def add_new_contact():
     status = st.selectbox("Status", ["Not Started", "In Progress", "Completed"])
     bank_details = st.text_input("Bank Details")
     last_payout = st.date_input("Last Payout")
+    
 def mostrar_contract ():
 
     st.subheader("Contracts")
