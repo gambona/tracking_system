@@ -103,7 +103,7 @@ def mostrar_partners():
 
 def mostrar_contract ():
 
-    st.subheader("Update Contract Status")
+    st.subheader("Update Contracts")
     contract_to_update = st.number_input("Enter Contract ID to Update", min_value=1, step=1)
     new_status = st.selectbox("New Status", ["Not Started", "In Progress", "Completed"], key="update_status")
 
@@ -163,7 +163,7 @@ with st.sidebar:
 
 funciones_diapositivas = {
     "Partners": mostrar_partners,
-    "Update contract status": mostrar_contract,
+    "Contracts": mostrar_contract,
     "Filters": mostrar_filters,
     "Add new contact": add_new_contact,
     "Update Status": update_status
