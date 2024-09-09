@@ -189,37 +189,41 @@ def mostrar_deliverables():
             "Completed", "In Progress", "Not Started", "Completed", "In Progress", 
             "Not Started", "Completed", "In Progress", "Not Started", "Completed"]
     }
-deliverables_df = pd.DataFrame(deliverables_data)
-deliverables_df['Deadline'] = pd.to_datetime(deliverables_df['Deadline']).dt.date  # Convert deadlines to date (remove time)
-tab1, tab2, tab3 = st.tabs(["📦 Deliverables Overview", "🔍 Filter by Status", "👤 Filter by Owner"])
-    with tab1:
-        st.subheader("📦 Deliverables Overview")
-        st.write(deliverables_df.reset_index(drop=True))  # Remove index from display  
-    with tab2:
-        st.subheader("🔍 Filter by Status")
-        status_filter = st.selectbox("Select status to filter", ["All", "Not Started", "In Progress", "Completed"])
-        if status_filter != "All":
-            filtered_df = deliverables_df[deliverables_df['Status'] == status_filter]
-            st.write(f"Deliverables with status **{status_filter}**:")
-            st.write(filtered_df.reset_index(drop=True)) 
-        else:
-            st.write("Showing all deliverables")
-            st.write(deliverables_df.reset_index(drop=True))
-    with tab3:
-        st.subheader("👤 Filter by Owner")
-        owner_filter = st.selectbox("Select an owner to view their deliverables", ["All"] + list(deliverables_df['Owner'].unique()))
-        if owner_filter != "All":
-            filtered_df = deliverables_df[deliverables_df['Owner'] == owner_filter]
-            st.write(f"Deliverables owned by **{owner_filter}**:")
-            st.write(filtered_df.reset_index(drop=True)) 
-        else:
-            st.write("Showing all deliverables")
-            st.write(deliverables_df.reset_index(drop=True))
-
-st.subheader("🚨 Most Urgent Deliverables")
-most_urgent_df = deliverables_df.sort_values(by='Deadline').head(5)  # Sort by deadline and show the top 5
-st.write("Here are the 5 most urgent deliverables based on the nearest deadlines:")
-st.write(most_urgent_df.reset_index(drop=True))  # Display without index
+    deliverables_df = pd.DataFrame(deliverables_data)
+    deliverables_df['Deadline'] = pd.to_datetime(deliverables_df['Deadline'])  # Convert deadlines to datetime
+    
+    # Display the full dataframe initially
+    st.subheader("📦 Deliverables Overview")
+    st.dataframe(deliverables_df)
+    
+    # Filter by Status
+    st.subheader("Filter by Status")
+    status_filter = st.selectbox("Select status to filter", ["All", "Not Started", "In Progress", "Completed"])
+    if status_filter != "All":
+        filtered_df = deliverables_df[deliverables_df['Status'] == status_filter]
+        st.write(f"Deliverables with status **{status_filter}**:")
+        st.dataframe(filtered_df)
+    else:
+        st.write("Showing all deliverables")
+        st.dataframe(deliverables_df)
+    
+    # Filter by Owner
+    st.subheader("Filter by Owner")
+    owner_filter = st.selectbox("Select an owner to view their deliverables", ["All"] + list(deliverables_df['Owner'].unique()))
+    if owner_filter != "All":
+        filtered_df = deliverables_df[deliverables_df['Owner'] == owner_filter]
+        st.write(f"Deliverables owned by **{owner_filter}**:")
+        st.dataframe(filtered_df)
+    else:
+        st.write("Showing all deliverables")
+        st.dataframe(deliverables_df)
+    
+    # Filter by Due Date
+    st.subheader("Filter by Due Date")
+    due_date_filter = st.date_input("Select a due date to view deliverables due on or before", value=pd.Timestamp('2024-09-30'))
+    filtered_df = deliverables_df[deliverables_df['Deadline'] <= pd.to_datetime(due_date_filter)]
+    st.write(f"Deliverables due on or before **{due_date_filter}**:")
+    st.dataframe(filtered_df)
     
 with st.sidebar:
     st.image("Eight_Sleep_logo.png")
