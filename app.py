@@ -107,7 +107,7 @@ def mostrar_contract():
 with st.sidebar:
     diapositiva = st.radio(
         "Índice",
-        ("Partners", "Contracts", "Filters"))
+        ("Partners", "Contracts"))
 
 funciones_diapositivas = {
     "Partners": mostrar_partners,
