@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import matplotlib as plt
 
 st.set_page_config(
     page_title="8 Sleep Affiliates & Influencers Tracking System",
