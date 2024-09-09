@@ -95,10 +95,10 @@ df = pd.DataFrame(data)
 
 def mostrar_partners():
     df_no_index = df.reset_index(drop=True)
-    st.subheader("All Contracts")
+    st.subheader("All Partners")
     st.table(df_no_index)
     
-def mostrar_contract ():
+def mostrar_contract():
     st.subheader("Contracts")
     contract_to_update = st.number_input("Enter Contract ID to Update", min_value=1, step=1)
     new_status = st.selectbox("New Status", ["Not Started", "In Progress", "Completed"], key="update_status")
@@ -116,7 +116,7 @@ def mostrar_contract ():
 with st.sidebar:
     diapositiva = st.radio(
         "Índice",
-        ("Partners", "Update contract status", "Filters", "Add new contact", "Update Status"))
+        ("Partners", "Contracts", "Filters"))
 
 funciones_diapositivas = {
     "Partners": mostrar_partners,
