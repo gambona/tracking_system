@@ -145,10 +145,6 @@ def mostrar_filters ():
         df = df.append(new_row, ignore_index=True)
         df.to_csv(file_path, index=False)  # Save new contract to the CSV
         st.success(f"Contract for {partner} added!")
-def update_status():
-    st.subheader("Update Contract Status")
-    contract_to_update = st.number_input("Enter Contract ID to Update", min_value=1, step=1)
-    new_status = st.selectbox("New Status", ["Not Started", "In Progress", "Completed"], key="update_status")
 
     if st.button("Update Status"):
         df.loc[df['Contract ID'] == contract_to_update, 'Status'] = new_status
@@ -164,7 +160,6 @@ funciones_diapositivas = {
     "Partners": mostrar_partners,
     "Add new contact": add_new_contact,
     "Contracts": mostrar_contract,
-    "Filters": mostrar_filters,
-    "Update Status": update_status
+    "Filters": mostrar_filters
 }
 funciones_diapositivas[diapositiva]()
