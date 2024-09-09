@@ -103,7 +103,7 @@ def mostrar_partners():
 
 def mostrar_contract ():
 
-    st.subheader("Update Contracts")
+    st.subheader("Contracts")
     contract_to_update = st.number_input("Enter Contract ID to Update", min_value=1, step=1)
     new_status = st.selectbox("New Status", ["Not Started", "In Progress", "Completed"], key="update_status")
 
