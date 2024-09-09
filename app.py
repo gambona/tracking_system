@@ -93,14 +93,20 @@ data = {
 
 df = pd.DataFrame(data)
 
-
-
-
 def mostrar_partners():
     df_no_index = df.reset_index(drop=True)
     st.subheader("All Contracts")
     st.table(df_no_index)
-
+def add_new_contact():
+    st.subheader("Add a New Contract")
+    partner = st.text_input("Partner Name")
+    contract_id = st.number_input("Contract ID", min_value=1)
+    deliverable = st.text_input("Deliverable")
+    owner = st.text_input("Owner")
+    deadline = st.date_input("Deadline")
+    status = st.selectbox("Status", ["Not Started", "In Progress", "Completed"])
+    bank_details = st.text_input("Bank Details")
+    last_payout = st.date_input("Last Payout")
 def mostrar_contract ():
 
     st.subheader("Contracts")
@@ -126,16 +132,7 @@ def mostrar_filters ():
     st.subheader("Filtered Contracts")
     st.dataframe(filtered_df)
 
-def add_new_contact():
-    st.subheader("Add a New Contract")
-    partner = st.text_input("Partner Name")
-    contract_id = st.number_input("Contract ID", min_value=1)
-    deliverable = st.text_input("Deliverable")
-    owner = st.text_input("Owner")
-    deadline = st.date_input("Deadline")
-    status = st.selectbox("Status", ["Not Started", "In Progress", "Completed"])
-    bank_details = st.text_input("Bank Details")
-    last_payout = st.date_input("Last Payout")
+
 
     if st.button("Add Contract"):
         new_row = {
@@ -163,10 +160,9 @@ with st.sidebar:
 
 funciones_diapositivas = {
     "Partners": mostrar_partners,
+    "Add new contact": add_new_contact,
     "Contracts": mostrar_contract,
     "Filters": mostrar_filters,
-    "Add new contact": add_new_contact,
     "Update Status": update_status
-
 }
 funciones_diapositivas[diapositiva]()
