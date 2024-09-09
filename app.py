@@ -105,7 +105,7 @@ def mostrar_contract():
     new_status = st.selectbox("New Status", ["Not Started", "In Progress", "Completed"], key="update_status")
 
     if st.button("Update Status"):
-        df.loc[df['Contract ID'] == contract_to_update, 'Status'] = new_status
+        df.loc[df['Status'] == "Not Started", 'Status'] = new_status
         df.to_csv(file_path, index=False)  # Save the updated status to the CSV
         st.success(f"Status for Contract ID {contract_to_update} updated!")
 
