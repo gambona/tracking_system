@@ -100,9 +100,49 @@ def mostrar_partners():
     
 def mostrar_contract():
     st.subheader("Contracts")
+
+    # Update contract status
     st.subheader("Update Contract")
     contract_to_update = st.number_input("Enter Contract ID to Update", min_value=1, step=1)
     new_status = st.selectbox("New Status", ["Not Started", "In Progress", "Completed"], key="update_status")
+
+    # Add a button to confirm updating the contract status
+    if st.button("Update Contract Status"):
+        # Check if the entered contract ID exists in the DataFrame
+        if contract_to_update in df['Contract ID'].values:
+            # Update the status of the contract
+            df.loc[df['Contract ID'] == contract_to_update, 'Status'] = new_status
+            st.success(f"Contract ID {contract_to_update} updated to {new_status}")
+        else:
+            st.error(f"Contract ID {contract_to_update} not found")
+    
+    # Filter contracts by status
+    st.subheader("Filter Contracts by Status")
+    status_filter = st.selectbox("Select Status to Filter", ["All", "Not Started", "In Progress", "Completed"], key="filter_status")
+
+    # Filter the DataFrame based on the selected status
+    if status_filter != "All":
+        filtered_df = df[df['Status'] == status_filter]
+    else:
+        filtered_df = df
+
+    # Display the filtered contracts
+    st.write("Filtered Contracts:")
+    st.dataframe(filtered_df)
+
+    # Pie chart showing distribution of contract statuses
+    st.subheader("Contracts Status Distribution")
+
+    # Count contracts per status
+    status_counts = df['Status'].value_counts()
+
+    # Create the pie chart using Matplotlib
+    fig, ax = plt.subplots()
+    ax.pie(status_counts, labels=status_counts.index, autopct='%1.1f%%', startangle=90, colors=['blue'] * len(status_counts))
+    ax.axis('equal')  # Ensure pie is drawn as a circle
+
+    # Display the pie chart in Streamlit
+    st.pyplot(fig)
 
 with st.sidebar:
     diapositiva = st.radio(
