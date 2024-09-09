@@ -197,7 +197,7 @@ def mostrar_deliverables():
     st.subheader("📦 Deliverables Overview")
 
     # Step 1: Filter by Owner
-    st.markdown("### Step 1: Who is responsible?")
+    st.markdown("### Filter by owner")
     selected_owner = st.selectbox("Select an owner to view their deliverables", 
                                   options=["All"] + list(deliverables_df['Owner'].unique()))
 
@@ -210,7 +210,7 @@ def mostrar_deliverables():
     st.dataframe(filtered_df)
 
     # Step 2: Filter by Deadline
-    st.markdown("### Step 2: Deadline matters")
+    st.markdown("### Calendar")
     deadline_filter = st.date_input("Select a deadline to view deliverables due by", 
                                     value=pd.Timestamp('2024-09-30'))
 
@@ -219,13 +219,15 @@ def mostrar_deliverables():
     st.dataframe(filtered_df)
 
     # Step 3: Filter by Status
-    st.markdown("### Step 3: What’s the status?")
+    st.markdown("Filter by status")
     status_filter = st.selectbox("Select status to filter", 
                                  options=["All", "Not Started", "In Progress", "Completed"])
 
+    # Apply the status filter only if "All" is not selected
     if status_filter != "All":
         filtered_df = filtered_df[filtered_df['Status'] == status_filter]
 
+    # Regardless of the filter, display all filtered lines from previous steps
     st.write(f"Deliverables with status **{status_filter if status_filter != 'All' else 'any'}**:")
     st.dataframe(filtered_df)
     
