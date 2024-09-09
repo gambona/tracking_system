@@ -19,12 +19,9 @@ data = {
     "Last Payout": ["2024-07-11", "2024-06-21", "2024-04-14", "2024-03-16", "2024-08-27"]
 }
 
-# Create a DataFrame from the data
+
 df = pd.DataFrame(data)
 
-# Display the DataFrame in Streamlit
-st.title("Contract Information")
-st.dataframe(df)
 
 
 
