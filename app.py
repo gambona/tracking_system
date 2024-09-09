@@ -118,7 +118,6 @@ def mostrar_contract():
     st.subheader("Filter Contracts by Status")
     status_filter = st.selectbox("Select Status to Filter", ["All", "Not Started", "In Progress", "Completed"], key="filter_status")
 
-    
     if status_filter != "All":
         filtered_df = df[df['Status'] == status_filter]
     else:
@@ -195,7 +194,7 @@ def mostrar_deliverables():
     
     # Display the full dataframe initially
     st.subheader("📦 Deliverables Overview")
-    st.dataframe(deliverables_df)
+    st.write(deliverables_df.reset_index(drop=True))
     
     # Filter by Status
     st.subheader("Filter by Status")
@@ -203,10 +202,10 @@ def mostrar_deliverables():
     if status_filter != "All":
         filtered_df = deliverables_df[deliverables_df['Status'] == status_filter]
         st.write(f"Deliverables with status **{status_filter}**:")
-        st.dataframe(filtered_df)
+        st.write(filtered_df.reset_index(drop=True))
     else:
         st.write("Showing all deliverables")
-        st.dataframe(deliverables_df)
+        st.write(deliverables_df.reset_index(drop=True))
     
     # Filter by Owner
     st.subheader("Filter by Owner")
@@ -214,17 +213,17 @@ def mostrar_deliverables():
     if owner_filter != "All":
         filtered_df = deliverables_df[deliverables_df['Owner'] == owner_filter]
         st.write(f"Deliverables owned by **{owner_filter}**:")
-        st.dataframe(filtered_df)
+        st.write(filtered_df.reset_index(drop=True))
     else:
         st.write("Showing all deliverables")
-        st.dataframe(deliverables_df)
+        st.write(deliverables_df.reset_index(drop=True))
     
     # Filter by Due Date
     st.subheader("Filter by Due Date")
     due_date_filter = st.date_input("Select a due date to view deliverables due on or before", value=pd.Timestamp('2024-09-30'))
     filtered_df = deliverables_df[deliverables_df['Deadline'] <= pd.to_datetime(due_date_filter)]
     st.write(f"Deliverables due on or before **{due_date_filter}**:")
-    st.dataframe(filtered_df)
+    st.write(filtered_df.reset_index(drop=True))
 
     
 with st.sidebar:
