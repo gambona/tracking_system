@@ -3,7 +3,6 @@ import pandas as pd
 
 st.set_page_config(
     page_title="8 Sleep Affiliates & Influencers Tracking System",
-    theme="dark",
     page_icon="📘",
     layout="wide",
     initial_sidebar_state="auto",
