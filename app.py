@@ -29,9 +29,9 @@ st.dataframe(df)
 
 
 def mostrar_partners():
-# Display the full DataFrame
+    df_no_index = df.reset_index(drop=True)
     st.subheader("All Contracts")
-    st.dataframe(df)
+    st.table(df_no_index)
 
 def mostrar_contract ():
 
