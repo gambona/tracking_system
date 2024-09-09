@@ -192,7 +192,7 @@ def mostrar_deliverables():
 deliverables_df = pd.DataFrame(deliverables_data)
 deliverables_df['Deadline'] = pd.to_datetime(deliverables_df['Deadline']).dt.date  # Convert deadlines to date (remove time)
 tab1, tab2, tab3 = st.tabs(["📦 Deliverables Overview", "🔍 Filter by Status", "👤 Filter by Owner"])
-      with tab1:
+    with tab1:
         st.subheader("📦 Deliverables Overview")
         st.write(deliverables_df.reset_index(drop=True))  # Remove index from display  
     with tab2:
