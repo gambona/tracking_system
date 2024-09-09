@@ -139,13 +139,50 @@ def mostrar_contract():
     # Display the pie chart in Streamlit
     #st.pyplot(fig)
 
+def mostrar_deliverables():
+    st.subheader("📦 Deliverables Overview")
+
+    # Step 1: Filter by Owner
+    st.markdown("### Step 1: Who is responsible?")
+    selected_owner = st.selectbox("Select an owner to view their deliverables", 
+                                  options=["All"] + list(deliverables_df['Owner'].unique()))
+
+    if selected_owner != "All":
+        filtered_df = deliverables_df[deliverables_df['Owner'] == selected_owner]
+    else:
+        filtered_df = deliverables_df
+
+    st.write(f"Deliverables owned by **{selected_owner if selected_owner != 'All' else 'everyone'}**:")
+    st.dataframe(filtered_df)
+
+    # Step 2: Filter by Deadline
+    st.markdown("### Step 2: Deadline matters")
+    deadline_filter = st.date_input("Select a deadline to view deliverables due by", 
+                                    value=pd.Timestamp('2024-09-30'))
+
+    filtered_df = filtered_df[filtered_df['Deadline'] <= pd.to_datetime(deadline_filter)]
+    st.write(f"Deliverables due by **{deadline_filter}**:")
+    st.dataframe(filtered_df)
+
+    # Step 3: Filter by Status
+    st.markdown("### Step 3: What’s the status?")
+    status_filter = st.selectbox("Select status to filter", 
+                                 options=["All", "Not Started", "In Progress", "Completed"])
+
+    if status_filter != "All":
+        filtered_df = filtered_df[filtered_df['Status'] == status_filter]
+
+    st.write(f"Deliverables with status **{status_filter if status_filter != 'All' else 'any'}**:")
+    st.dataframe(filtered_df)
+    
 with st.sidebar:
     diapositiva = st.radio(
         "Índice",
-        ("Partners", "Contracts"))
+        ("Partners", "Contracts", "Deliverables"))
 
 funciones_diapositivas = {
     "Partners": mostrar_partners,
     "Contracts": mostrar_contract,
+    "Deliverables": mostrar_deliverables
 }
 funciones_diapositivas[diapositiva]()
