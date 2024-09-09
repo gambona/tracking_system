@@ -8,9 +8,24 @@ st.set_page_config(
     initial_sidebar_state="auto",
 )
 
-# Load CSV
-file_path = "contract_data.csv"  
-df = pd.read_csv(file_path)
+data = {
+    "Name": ["Peter Attia", "Doctor's Farmacy", "Doctor's Farmacy", "Shameless Mom Academy", "Chasing Excellence"],
+    "Contract ID": [1, 2, 3, 4, 5],
+    "Deliverable": ["YouTube Video", "Sponsored Content", "Instagram Post", "Podcast Promotion", "Blog Review"],
+    "Owner": ["Bob", "David", "Charlie", "Bob", "David"],
+    "Deadline": ["2025-03-01", "2025-03-01", "2024-10-24", "2025-01-24", "2024-10-13"],
+    "Status": ["In Progress", "Not Started", "Completed", "Not Started", "Completed"],
+    "Bank Details": ["***5678***", "***3456***", "***9876***", "***3456***", "***7890***"],
+    "Last Payout": ["2024-07-11", "2024-06-21", "2024-04-14", "2024-03-16", "2024-08-27"]
+}
+
+# Create a DataFrame from the data
+df = pd.DataFrame(data)
+
+# Display the DataFrame in Streamlit
+st.title("Contract Information")
+st.dataframe(df)
+
 
 
 def mostrar_partners():
