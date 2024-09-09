@@ -191,45 +191,7 @@ def mostrar_deliverables():
             "Not Started", "Completed", "In Progress", "Not Started", "Completed"]
     }
     
-    deliverables_df = pd.DataFrame(deliverables_data)
-    deliverables_df['Deadline'] = pd.to_datetime(deliverables_df['Deadline'])  
 
-    st.subheader("📦 Deliverables Overview")
-
-    # Step 1: Filter by Owner
-    st.markdown("### Filter by owner")
-    selected_owner = st.selectbox("Select an owner to view their deliverables", 
-                                  options=["All"] + list(deliverables_df['Owner'].unique()))
-
-    if selected_owner != "All":
-        filtered_df = deliverables_df[deliverables_df['Owner'] == selected_owner]
-    else:
-        filtered_df = deliverables_df
-
-    st.write(f"Deliverables owned by **{selected_owner if selected_owner != 'All' else 'everyone'}**:")
-    st.dataframe(filtered_df)
-
-    # Step 2: Filter by Deadline
-    st.markdown("### Calendar")
-    deadline_filter = st.date_input("Select a deadline to view deliverables due by", 
-                                    value=pd.Timestamp('2024-09-30'))
-
-    filtered_df = filtered_df[filtered_df['Deadline'] <= pd.to_datetime(deadline_filter)]
-    st.write(f"Deliverables due by **{deadline_filter}**:")
-    st.dataframe(filtered_df)
-
-    # Step 3: Filter by Status
-    st.markdown("Filter by status")
-    status_filter = st.selectbox("Select status to filter", 
-                                 options=["All", "Not Started", "In Progress", "Completed"])
-
-    # Apply the status filter only if "All" is not selected
-    if status_filter != "All":
-        filtered_df = filtered_df[filtered_df['Status'] == status_filter]
-
-    # Regardless of the filter, display all filtered lines from previous steps
-    st.write(f"Deliverables with status **{status_filter if status_filter != 'All' else 'any'}**:")
-    st.dataframe(filtered_df)
     
 with st.sidebar:
     diapositiva = st.radio(
