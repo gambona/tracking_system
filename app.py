@@ -140,6 +140,60 @@ def mostrar_contract():
     #st.pyplot(fig)
 
 def mostrar_deliverables():
+    
+    deliverables_data = {
+    "Deliverables": [
+            "YouTube Video", "Sponsored Content", "Instagram Post", "Podcast Promotion", "Blog Review", 
+            "Sponsored Content", "Sponsored Content", "YouTube Video", "Instagram Post", "Instagram Post", 
+            "Sponsored Content", "Blog Review", "Instagram Post", "Podcast Promotion", "YouTube Video", 
+            "YouTube Video", "Instagram Post", "Blog Review", "YouTube Video", "Podcast Promotion", 
+            "Blog Review", "Podcast Promotion", "Podcast Promotion", "Instagram Post", "Sponsored Content", 
+            "Podcast Promotion", "YouTube Video", "Podcast Promotion", "Instagram Post", "Sponsored Content", 
+            "YouTube Video", "Podcast Promotion", "Sponsored Content", "Instagram Post", "Sponsored Content", 
+            "Podcast Promotion", "Instagram Post", "Blog Review", "Instagram Post", "Sponsored Content", 
+            "Instagram Post", "Podcast Promotion", "Blog Review", "YouTube Video", "YouTube Video", 
+            "Instagram Post", "Sponsored Content", "YouTube Video", "Instagram Post", "Instagram Post"
+        ],
+        "Owner": [
+            "Bob", "David", "Charlie", "Bob", "David", 
+            "Alice", "Emma", "Charlie", "Bob", "David", 
+            "Charlie", "Emma", "David", "Charlie", "Bob", 
+            "Alice", "David", "Emma", "Charlie", "Bob", 
+            "David", "Emma", "Bob", "David", "Charlie", 
+            "Bob", "Emma", "Charlie", "David", "Alice", 
+            "Bob", "Emma", "David", "Alice", "Charlie", 
+            "David", "Bob", "Emma", "Charlie", "David", 
+            "Bob", "Emma", "Alice", "David", "Charlie", 
+            "Emma", "Bob", "David", "Alice", "Charlie"
+        ],
+        "Deadline": [
+        "2025-03-01", "2025-03-01", "2024-10-24", "2025-01-24", "2024-10-13", 
+            "2025-02-10", "2025-01-05", "2024-11-23", "2024-12-29", "2025-03-12", 
+            "2025-01-07", "2025-02-15", "2024-10-28", "2025-03-02", "2025-03-04", 
+            "2024-12-01", "2025-01-15", "2024-11-10", "2025-03-11", "2025-01-06", 
+            "2024-11-29", "2025-02-25", "2025-03-01", "2024-10-19", "2025-02-05", 
+            "2025-01-03", "2024-12-15", "2025-03-12", "2024-10-18", "2025-01-20", 
+            "2025-02-02", "2024-11-17", "2025-02-19", "2024-10-20", "2025-03-05", 
+            "2025-01-22", "2024-12-28", "2025-02-12", "2024-10-14", "2025-02-28", 
+            "2025-03-06", "2024-12-03", "2025-01-21", "2025-02-11", "2024-10-29", 
+            "2025-03-15", "2024-12-10", "2024-11-22", "2024-10-15", "2025-02-07"
+        ],
+        "Status": [
+            "In Progress", "Not Started", "Completed", "Not Started", "Completed", 
+            "Not Started", "Not Started", "In Progress", "Not Started", "Completed", 
+            "In Progress", "Completed", "Completed", "Not Started", "Completed", 
+            "Not Started", "Completed", "In Progress", "In Progress", "In Progress", 
+            "In Progress", "Completed", "Not Started", "Completed", "Not Started", 
+            "Completed", "In Progress", "Not Started", "In Progress", "In Progress", 
+            "Completed", "In Progress", "Completed", "Completed", "In Progress", 
+            "Not Started", "In Progress", "Not Started", "Completed", "Not Started", 
+            "Completed", "In Progress", "Not Started", "Completed", "In Progress", 
+            "Not Started", "Completed", "In Progress", "Not Started", "Completed"]
+    }
+    
+    deliverables_df = pd.DataFrame(deliverables_data)
+    deliverables_df['Deadline'] = pd.to_datetime(deliverables_df['Deadline'])  
+
     st.subheader("📦 Deliverables Overview")
 
     # Step 1: Filter by Owner
