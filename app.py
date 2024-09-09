@@ -9,7 +9,7 @@ st.set_page_config(
 )
 
 # Load CSV
-file_path = "contract_data.csv"  # Change this to the correct path of your CSV file
+file_path = "/Users/aguedagambon/Documents/8/contract_data.csv"  # Change this to the correct path of your CSV file
 df = pd.read_csv(file_path)
 
 
