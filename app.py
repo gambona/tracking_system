@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(
-    page_title="8 Sleep Affiliates & Influencers Tracking System",
+    page_title="Partner Tracker System",
     page_icon="📘",
     layout="wide",
     initial_sidebar_state="auto",
