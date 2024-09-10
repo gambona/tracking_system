@@ -193,7 +193,7 @@ def mostrar_deliverables():
     deliverables_df['Deadline'] = pd.to_datetime(deliverables_df['Deadline'])  # Convert deadlines to datetime
     
     # Display the full dataframe initially
-    st.subheader("📦 Deliverables Overview")
+    st.subheader("Deliverables Overview")
     st.dataframe(deliverables_df)
     
     # Filter by Status
