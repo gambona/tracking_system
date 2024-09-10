@@ -196,11 +196,11 @@ def mostrar_deliverables():
     }
     
     def highlight_deadlines(val):
-    if val < pd.Timestamp.today():
-        return 'background-color: red'
-    elif val < pd.Timestamp.today() + pd.DateOffset(days=7):
-        return 'background-color: yellow'
-    return ''
+        if val < pd.Timestamp.today():
+            return 'background-color: red'
+        elif val < pd.Timestamp.today() + pd.DateOffset(days=7):
+            return 'background-color: yellow'
+        return ''
 
     deliverables_df.style.applymap(highlight_deadlines, subset=['Deadline'])
 
