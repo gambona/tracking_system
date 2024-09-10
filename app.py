@@ -232,6 +232,10 @@ def mostrar_deliverables():
     filtered_df = deliverables_df[deliverables_df['Deadline'] <= pd.to_datetime(due_date_filter)]
     st.write(f"Deliverables due on or before **{due_date_filter}**:")
     st.dataframe(filtered_df)
+
+    st.subheader("Deliverables by Status")
+    status_counts = deliverables_df['Status'].value_counts()
+    st.bar_chart(status_counts)
     
 with st.sidebar:
     st.image("Eight_Sleep_logo.png")
