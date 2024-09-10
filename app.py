@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import matplotly as plt
 
 st.set_page_config(
     page_title="Partner Tracker System",
