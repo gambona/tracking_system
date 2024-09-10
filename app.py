@@ -235,17 +235,6 @@ def mostrar_deliverables():
     st.dataframe(filtered_df)
 
     
-    st.subheader("Deliverables by Status")
-    
-    status_counts = df['Status'].value_counts()
-    
-    colors = ['green' if status == 'Completed' else 'yellow' if status == 'In Progress' else 'red' for status in status_counts.index]
-    
-    fig, ax = plt.subplots()
-    ax.pie(status_counts, labels=status_counts.index, autopct='%1.1f%%', startangle=90, colors=colors)
-    ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-    
-    st.pyplot(fig)
     
 with st.sidebar:
     st.image("Eight_Sleep_logo.png")
