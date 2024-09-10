@@ -195,14 +195,6 @@ def mostrar_deliverables():
             "Not Started", "Completed", "In Progress", "Not Started", "Completed"]
     }
     
-    def highlight_deadlines(val):
-        if val < pd.Timestamp.today():
-            return 'background-color: red'
-        elif val < pd.Timestamp.today() + pd.DateOffset(days=7):
-            return 'background-color: yellow'
-        return ''
-
-    deliverables_df.style.applymap(highlight_deadlines, subset=['Deadline'])
 
     
     deliverables_df = pd.DataFrame(deliverables_data)
@@ -245,12 +237,11 @@ with st.sidebar:
     st.image("Eight_Sleep_logo.png")
     diapositiva = st.radio(
         "Index",
-        ("Partners", "Contracts", "Deliverables","Target date"))
+        ("Partners", "Contracts", "Deliverables"))
 
 funciones_diapositivas = {
     "Partners": mostrar_partners,
     "Contracts": mostrar_contract,
-    "Deliverables": mostrar_deliverables,
-    "Target date": highlight_deadlines
+    "Deliverables": mostrar_deliverables
 }
 funciones_diapositivas[diapositiva]()
