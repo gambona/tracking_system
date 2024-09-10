@@ -93,6 +93,11 @@ data = {
 
 df = pd.DataFrame(data)
 
+def mostrar_intro():
+    df_no_index = df.reset_index(drop=True)
+    st.subheader("Tracking Partner Performance")
+    st.text('Your text here')
+   
 def mostrar_partners():
     df_no_index = df.reset_index(drop=True)
     st.subheader("All Partners")
@@ -189,6 +194,17 @@ def mostrar_deliverables():
             "Completed", "In Progress", "Not Started", "Completed", "In Progress", 
             "Not Started", "Completed", "In Progress", "Not Started", "Completed"]
     }
+    
+    def highlight_deadlines(val):
+    if val < pd.Timestamp.today():
+        return 'background-color: red'
+    elif val < pd.Timestamp.today() + pd.DateOffset(days=7):
+        return 'background-color: yellow'
+    return ''
+
+    deliverables_df.style.applymap(highlight_deadlines, subset=['Deadline'])
+
+    
     deliverables_df = pd.DataFrame(deliverables_data)
     deliverables_df['Deadline'] = pd.to_datetime(deliverables_df['Deadline'])  # Convert deadlines to datetime
     
@@ -229,11 +245,12 @@ with st.sidebar:
     st.image("Eight_Sleep_logo.png")
     diapositiva = st.radio(
         "Index",
-        ("Partners", "Contracts", "Deliverables"))
+        ("Partners", "Contracts", "Deliverables","Target date"))
 
 funciones_diapositivas = {
     "Partners": mostrar_partners,
     "Contracts": mostrar_contract,
-    "Deliverables": mostrar_deliverables
+    "Deliverables": mostrar_deliverables,
+    "Target date": highlight_deadlines
 }
 funciones_diapositivas[diapositiva]()
